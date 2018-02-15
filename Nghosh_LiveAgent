@@ -1,0 +1,18 @@
+<html>
+<head>
+<script type='text/javascript' src='https://c.la1-c1-ukb.salesforceliveagent.com/content/g/js/42.0/deployment.js'></script>
+<script type='text/javascript'>
+liveagent.init('https://d.la1-c1-ukb.salesforceliveagent.com/chat', '57290000000XZDB', '00D90000000z96v');
+</script>
+</head>
+<body>
+<img id="liveagent_button_online_57390000000XZDl" style="display: none; border: 0px none; cursor: pointer" onclick="liveagent.startChat('57390000000XZDl')" src="https://debanjan-developer-edition.ap1.force.com/Chat/resource/1497041946000/online" /><img id="liveagent_button_offline_57390000000XZDl" style="display: none; border: 0px none; " src="https://debanjan-developer-edition.ap1.force.com/Chat/resource/1497041946000/offline" />
+
+<script type="text/javascript">
+if (!window._laq) { window._laq = []; }
+window._laq.push(function(){liveagent.showWhenOnline('57390000000XZDl', document.getElementById('liveagent_button_online_57390000000XZDl'));
+liveagent.showWhenOffline('57390000000XZDl', document.getElementById('liveagent_button_offline_57390000000XZDl'));
+});
+</script>
+</body>
+</html>
