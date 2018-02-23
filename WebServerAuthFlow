@@ -1,0 +1,73 @@
+public class ConnectSandbox {
+    public String clientId {get;set;}
+    public String clientSecret {get; set;} //= '4410656530924936143';
+    public String authorizationToken {get; set;} 
+    public String authRequest {get; set;} 
+    public String responseBody{get;set;}
+    public String accessToken{get;set;}
+    public String refreshToken{get;set;}
+    public String oldAccessToken{get;set;}
+    public String newAccessTokenAfterInvoked{get;set;}
+    public String redirectUri = 'https://login.salesforce.com/services/oauth2/success';
+    public String callBackUri = 'https://nirmallya2016-dev-ed--datamodel.ap6.visual.force.com/apex/ConnectSandbox';
+    
+    public ConnectSandBox() {
+        clientId = '3MVG9ZL0ppGP5UrBmK0Nmry6338YuiQutYY8TjD.2lOoEFUTSm336XPCJF2.DMpnWqlPs6YOP6Yd0phm_k5kK';
+        authorizationToken = ApexPages.currentPage().getParameters().get('code');
+    }
+    public PageReference getAuthorizationToken() {
+        authRequest = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code'+
+            '&client_id=3MVG9ZL0ppGP5UrBmK0Nmry6338YuiQutYY8TjD.2lOoEFUTSm336XPCJF2.DMpnWqlPs6YOP6Yd0phm_k5kK&redirect_uri=https://nirmallya2016-dev-ed--datamodel.ap6.visual.force.com/apex/ConnectSandbox';
+        return new PageReference(authRequest);
+    }
+    public String getAccessToken () {
+        String reqbody = 'grant_type=authorization_code'+
+            '&code='+authorizationToken+
+            '&client_secret='+clientSecret+
+            '&client_id='+clientId+
+            '&redirect_uri='+callBackUri;
+        Http h = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setBody(reqbody);
+        req.setMethod('POST');
+        req.setEndpoint('https://login.salesforce.com/services/oauth2/token');
+        HttpResponse res = h.send(req);
+        responseBody = res.getBody();
+        Map<String,Object> mapBody = (Map<String,Object>)JSON.deserializeUntyped(responseBody);
+        accessToken = (String)mapBody.get('access_token');
+        refreshToken = (String)mapBody.get('id_token');
+        return null;
+    }
+    
+    public String getNewAccessToken () {
+        String reqbody = 'grant_type=refresh_token'+
+            '&client_secret='+clientSecret+
+            '&client_id='+clientId+
+            '&refresh_token='+refreshToken;
+        Http h = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setBody(reqbody);
+        req.setMethod('POST');
+        req.setEndpoint('https://login.salesforce.com/services/oauth2/token');
+        HttpResponse res = h.send(req);
+        String responseBody = res.getBody();
+        Map<String,Object> mapBody = (Map<String,Object>)JSON.deserializeUntyped(responseBody);
+        newAccessTokenAfterInvoked = (String)mapBody.get('access_token');
+        //refreshToken = (String)mapBody.get('id_token');
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.INFO, responseBody));
+        return null;
+    }
+    
+    public void consumeDestinationOrgRestService() {
+        String endPoint = 'https://nirmallyapoc-dev-ed.my.salesforce.com/services/apexrest/casecreate';
+        Http h = new Http();
+        HttpRequest req = new HttpRequest();
+        req.setHeader('Authorization', 'Bearer '+accessToken);
+        req.setMethod('GET');
+        req.setEndpoint(endPoint);
+        HttpResponse res = h.send(req);
+        String responseBody = res.getBody();
+        //Map<String,Object> mapBody = (Map<String,Object>)JSON.deserializeUntyped(responseBody);
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.INFO, responseBody));
+    }
+}
