@@ -1,0 +1,75 @@
+<apex:page controller="ConnectSandbox" showHeader="false" sidebar="false">
+    <apex:form >
+        <apex:pagemessages />
+        <apex:pageblock title="Step 1: Get Authorization Token">
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:inputTextarea label="clientId" value="{!clientId}" rows="3" cols="60"/>
+                    <apex:commandButton action="{!getAuthorizationToken}" value="Get Auth Token" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Authorization Token"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!authorizationToken}" id="authorizationToken" rows="3" cols="50"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+        <apex:pageblock title="Step 2: Get Access Token Response Body">
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Enter Server Client ID"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!clientId}" rows="3" cols="50"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Enter Auth Token"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!authorizationToken}" rows="3" cols="50"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Client Secret"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!clientSecret}" rows="2" cols="50"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton action="{!getAccessToken}" value="Get Access Token" />
+                    <apex:inputTextarea value="{!responseBody}" rows="6" cols="60"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageblock> 
+        <apex:pageblock title="Step 3: Fetched Access Token & Refresh Token From Response">
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Access Token"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!accessToken}" rows="4" cols="50"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Refresh Token"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!refreshToken}" rows="4" cols="50"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageblock> 
+        <apex:pageblock title="Step 3: Fetch New Access Token From Refresh Token:Not Working">
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Refresh Token"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!refreshToken}" rows="4" cols="50"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton action="{!getNewAccessToken}" value="Get New Access Token" />
+                    <apex:inputTextarea value="{!newAccessTokenAfterInvoked}" rows="4" cols="50"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageblock> 
+        <apex:pageblock title="Step 4: Consume Rest Service of Destination Org">
+            <apex:pageBlockSection columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Access Token"></apex:outputLabel> 
+                    <apex:inputTextarea value="{!accessToken}" rows="4" cols="50"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:commandButton action="{!consumeDestinationOrgRestService}" value="Consume Target Rest Service" />
+					<apex:outputText></apex:outputText>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageblock> 
+    </apex:form>
+</apex:page>
