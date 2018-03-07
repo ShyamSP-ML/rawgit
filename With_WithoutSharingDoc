@@ -1,0 +1,37 @@
+Global with Sharing and Without Sharing Example
+
+Step 1: Create two users in Developer Org
+	User 1 – Profile: System Administrator
+	User 2 – Profile: Disable Lightning User (Remove View All, Modify All from Contact Object)
+
+Step 2: Set Contact OWD to Private
+Create an Apex Class – Below are the Code
+	public with sharing class WithoutSharingExample {
+    		public List<Contact> getContactList() {
+       			 return [Select Id, FirstName, LastName, Email, Phone, Owner.Name From Contact];
+    		}
+}
+Create an Apex Visual force page – Below are the Code
+	<apex:page controller="WithoutSharingExample" sidebar="false" showHeader="false">
+    	<apex:form>
+        	<apex:pageBlock title="My Contact">
+            		<apex:pageBlockTable value="{!ContactList}" var="c">
+                		<apex:column value="{!c.FirstName}"/>
+               	 	<apex:column value="{!c.LastName}"/>
+                		<apex:column value="{!c.Email}"/>
+                		<apex:column value="{!c.Phone}"/>
+                		<apex:column value="{!c.Owner.Name}"/>
+            </apex:pageBlockTable>
+        	</apex:pageBlock>
+    	</apex:form>
+</apex:page>
+
+Step 3: Login with User 2: Profile Disable Lightning User (Remove View All, Modify All from Contact Object)
+	If Page Controller is Custom Controller or Controller Extension, then – 
+		With Sharing – Display the contact created by User 2 only
+		Without Sharing – Display All the Contact (No Sharing Setting Enforced)
+	If Page is having Standard Controller, then – 
+		Run in User mode, use OWD settings, display only contact created by User 2
+
+	
+
