@@ -22,7 +22,9 @@
 	<script type='text/javascript' src='http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js'></script>
 	<script type='text/javascript'>
 		
-		
+		var data = '00D4D0000008ayw!ARwAQEqNwYNPevVZCnM9.qTnxkj7lM84lIeTiwkGKVpG1I.qv6ppVA5rHLl6Flym2aGEcbUR0sVd5n6xrmMp3cyon75W4_z7';
+		var key = 'my long and very secretive passphrase';
+		var encryptedtoken = CryptoJS.AES.encrypt(data, key).toString();
 		
 		var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
