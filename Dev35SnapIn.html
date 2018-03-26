@@ -26,8 +26,7 @@
 	<script type='text/javascript'>
 		
 		var data = '00D4D0000008ayw!ARwAQLvx5vwJ.eUSqdbhSr8V9LJdI4V1NolKcueH5gjgk7NpMPC4Uwwzl2H473MRkZL5chQb9jwYWG3xpbYo5cbgEzVWBs6f';
-		var key = new Blob(['6262dafae944140fe4354cb8f8af25a8'], { type: 'plain/text',
-                                      endings: 'native' });
+		var key = 6262dafae944140fe4354cb8f8af25a8;
 		
 		var encryptedtoken = CryptoJS.AES.encrypt(data, key).toString();
 		console.log('encryptedtoken'+encryptedtoken);
