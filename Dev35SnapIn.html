@@ -28,7 +28,7 @@
 		var data = '00D4D0000008ayw!ARwAQL5jkobL2sdspSdgr1RMh2XJuUbciFXBUtw3miRKgBhJICjUQXC0EjZ.HFxF3jBi3Zub.wyllCVMwKcUUHHOm9K9fRCk';
 		var key = 'my long and very secretive passphrase';
 		
-		var encryptedtoken = CryptoJS.AES.encrypt(data, key).toString();
+		var encryptedtoken = CryptoJS.AES.encrypt(data, key,256).toString();
 		console.log('encryptedtoken'+encryptedtoken);
 		var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
