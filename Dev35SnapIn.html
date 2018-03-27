@@ -27,7 +27,7 @@
 		
 		var data = '00D4D0000008ayw!ARwAQKmkidQp8Yw9lfoSnomzBncO6x3PEBVnfZMzDSvVtr3W.EfpslLBJoOWNVYHW2d8Vny36bQlIpABZ5pLh_AF0j88.MVL';
 		var key = new Blob(["6262dafae944140fe4354cb8f8af25a8"],{type: "text/plain;charset=utf-8"});
-		
+		console.log('key-----> '+key);
 		var encryptedtoken = CryptoJS.AES.encrypt(data, key).toString();
 		console.log('encryptedtoken'+encryptedtoken);
 		var initESW = function(gslbBaseURL) {
