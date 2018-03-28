@@ -28,7 +28,7 @@
 		var data = new Blob(['00D4D0000008ayw!ARwAQEZ2pyQmACEcKAsJJUh4L3o6Yt3q_mzAj8Bqf6mBz_TAYEISv1vxJowNN0O2nkchSqOzAkDhbrur5pBRcz6ndhtaMo9F']);
 		var key = new Blob(['6262dafae944140fe4354cb8f8af25a8']);
 		console.log('key-----> '+key);
-		var encryptedtoken = CryptoJS.AES.encrypt(data, key);
+		var encryptedtoken = CryptoJS.AES.encrypt(data, key).toString();
 		console.log('encryptedtoken'+encryptedtoken);
 		var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
